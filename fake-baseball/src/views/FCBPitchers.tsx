@@ -26,7 +26,7 @@ export default function FCBPitchers() {
     const [pitches, setPitches] = React.useState<FormSchemaPitches>([])
     const [isLoading, setIsLoading] = React.useState(true);
     const [error, setError] = React.useState('');
-    const [pitcherOption, setPitcherOption] = React.useState('')
+    const [pitcherOption, setPitcherOption] = React.useState<number>()
     const [pitchNumbers, setPitchNumbers] = React.useState<number[]>([])
     const [swingNumbers, setSwingNumbers] = React.useState<number[]>([])
     const [pitchCount, setPitchCount] = React.useState<number[]>([])
@@ -63,7 +63,7 @@ export default function FCBPitchers() {
       if (players != null) {
         const pitchersList = []
         for (let i = 0; i < players.length; i++) {
-          if(players[i].pitchType != "" && (players[i].Team == "UWU" || players[i].Team == "ZOO" || players[i].Team == "KSU" || players[i].Team == "BSU" || players[i].Team == "BDE" || players[i].Team == "CSU")) {
+          if(players[i].pitchType != "" ) {
             pitchersList.push(players[i])
           }
         }
@@ -94,7 +94,7 @@ export default function FCBPitchers() {
       setPitches([])
       let player = players.find(player => player.playerID === Number(event.target.value))
       if (player) {
-        setPitcherOption(player.playerName)
+        setPitcherOption(Number(event.target.value))
       }
       const pNumbers = []
       const sNumbers = []
@@ -188,10 +188,10 @@ export default function FCBPitchers() {
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    label={pitcherOption}
+                    label={pitcherOption ? pitchers.find(p => p.playerID === pitcherOption)?.playerName : "Select a pitcher"}
                     onChange={handleChangePitcher}
                     color="warning"
-                    value={pitcherOption}
+                    value={pitcherOption ? pitcherOption.toString() : ""}
                   >
                     {
                       pitchers.map((pitcher) => {
@@ -281,12 +281,10 @@ export default function FCBPitchers() {
                         {
                           label: "Pitch", data: pitchNumbers, color:"red"
                         },
-                        {
-                          label: "Swing", data: swingNumbers
-                        },
                       ]}
                       // width={document.documentElement.clientWidth * 0.50}
                       height={document.documentElement.clientHeight * 0.40}
+                      tooltip={{trigger: 'item'}}
                     />
                   }
                 </Grid>
@@ -308,6 +306,7 @@ export default function FCBPitchers() {
                       ]}
                       width={document.documentElement.clientWidth * 0.40}
                       height={document.documentElement.clientHeight * 0.40}
+                      tooltip={{trigger: 'item'}}
                     />
                   }
                 </Grid>
@@ -325,6 +324,7 @@ export default function FCBPitchers() {
                       }))}
                       width={document.documentElement.clientWidth * 0.90}
                       height={document.documentElement.clientHeight * 0.50}
+                      tooltip={{trigger: 'item'}}
                     />
                   }
                 </Grid>

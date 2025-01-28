@@ -26,7 +26,7 @@ export default function MLRPitchers() {
     const [pitches, setPitches] = React.useState<FormSchemaPitches>([])
     const [isLoading, setIsLoading] = React.useState(true);
     const [error, setError] = React.useState('');
-    const [pitcherOption, setPitcherOption] = React.useState('')
+    const [pitcherOption, setPitcherOption] = React.useState<number>()
     const [pitchNumbers, setPitchNumbers] = React.useState<number[]>([])
     const [swingNumbers, setSwingNumbers] = React.useState<number[]>([])
     const [pitchCount, setPitchCount] = React.useState<number[]>([])
@@ -178,7 +178,7 @@ export default function MLRPitchers() {
       setPitches([])
       let player = players.find(player => player.playerID === Number(event.target.value))
       if (player) {
-        setPitcherOption(player.playerName)
+        setPitcherOption(Number(event.target.value))
       }
     
       try {
@@ -207,10 +207,10 @@ export default function MLRPitchers() {
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    label={pitcherOption}
+                    label={pitcherOption ? pitchers.find(p => p.playerID === pitcherOption)?.playerName : "Select a pitcher"}
                     onChange={handleChangePitcher}
                     color="warning"
-                    value={pitcherOption}
+                    value={pitcherOption ? pitcherOption.toString() : ""}
                   >
                     {
                       pitchers.map((pitcher) => {
