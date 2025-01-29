@@ -17,7 +17,7 @@ import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import Grid from '@mui/material/Grid2';
 import { LineChart } from '@mui/x-charts/LineChart';
-import { getModel1, getModel2, getModel3, getModel4, getModel5, getModel6, getModel7, getModel8, getModel9, getModel10, getModel11, getModel12, getModel13, getModel14, getModel15, getModel16, calculateCircleDelta } from '../utils/utils';
+import { calculateCircleDelta } from '../utils/utils';
 import { FormSchemaPitchInInning } from '../types/schemas/pitch-in-inning-schema';
 
 export default function FCBPitchers() {
@@ -219,26 +219,12 @@ export default function FCBPitchers() {
                           <TableCell width={50} align="center" >Inning</TableCell>
                           <TableCell width={50} align="center" >Outs</TableCell>
                           <TableCell width={50} align="center" style={{borderRightWidth: 1, borderRightColor: 'red',borderRightStyle: 'solid'}}>OBC</TableCell>
-                          <TableCell width={50} align="center">M 1</TableCell>
-                          <TableCell width={50} align="center">M 2</TableCell>
-                          <TableCell width={50} align="center">M 3</TableCell>
-                          <TableCell width={50} align="center">M 4</TableCell>
-                          <TableCell width={50} align="center">M 5</TableCell>
-                          <TableCell width={50} align="center">M 6</TableCell>
-                          <TableCell width={50} align="center">M 7</TableCell>
-                          <TableCell width={50} align="center">M 8</TableCell>
-                          <TableCell width={50} align="center">M 9</TableCell>
-                          <TableCell width={50} align="center">M 10</TableCell>
-                          <TableCell width={50} align="center">M 11</TableCell>
-                          <TableCell width={50} align="center">M 12</TableCell>
-                          <TableCell width={50} align="center">M 13</TableCell>
-                          <TableCell width={50} align="center">M 14</TableCell>
-                          <TableCell width={50} align="center">M 15</TableCell>
-                          <TableCell width={50} align="center">M 16</TableCell>
+                          <TableCell width={50} align="center">Season</TableCell>
+                          <TableCell width={50} align="center">Session</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {pitches.map((pitch, i , array) => {
+                      {pitches.map((pitch) => {
                           return <TableRow
                           key={pitch.playNumber}
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -252,23 +238,9 @@ export default function FCBPitchers() {
                             <TableCell align="center">{pitch.outs}</TableCell>
                             <TableCell align="center" style={{borderRightWidth: 1, borderRightColor: 'red',borderRightStyle: 'solid'}}>{pitch.obc}</TableCell>
                             <TableCell colSpan= {1} component="th" scope="row" align="center">
-                              {getModel1(pitch)}
+                              {pitch.season}
                             </TableCell>
-                            <TableCell align="center">{getModel2(pitch, array[i-1])}</TableCell>
-                            <TableCell align="center">{getModel3(pitch, array[i-1])}</TableCell>
-                            <TableCell align="center">{getModel4(pitch)}</TableCell>
-                            <TableCell align="center">{getModel5(pitch, array[i-1])}</TableCell>
-                            <TableCell align="center">{getModel6(pitch, array[i-1])}</TableCell>
-                            <TableCell align="center">{getModel7(pitch)}</TableCell>
-                            <TableCell align="center">{getModel8(pitch)}</TableCell>
-                            <TableCell align="center">{getModel9(pitch, array[i-1])}</TableCell>
-                            <TableCell align="center">{getModel10(pitch, array[i-1])}</TableCell>
-                            <TableCell align="center">{getModel11(pitch, array[i-1])}</TableCell>
-                            <TableCell align="center">{getModel12(pitch, array[i-1])}</TableCell>
-                            <TableCell align="center">{getModel13(pitch)}</TableCell>
-                            <TableCell align="center">{getModel14(pitch, array[i-1])}</TableCell>
-                            <TableCell align="center">{getModel15(pitch)}</TableCell>
-                            <TableCell align="center">{getModel16(pitch, array[i-1])}</TableCell>
+                            <TableCell align="center">{pitch.session}</TableCell>
                           </TableRow>
                       })}
                     </TableBody>
