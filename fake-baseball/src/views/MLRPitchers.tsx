@@ -17,7 +17,7 @@ import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import Grid from '@mui/material/Grid2';
 import { LineChart } from '@mui/x-charts/LineChart';
-import { getModel1, getModel2, getModel3, getModel4, getModel5, getModel6, getModel7, getModel8, getModel9, getModel10, getModel11, getModel12, getModel13, getModel14, getModel15, getModel16 } from '../utils/utils';
+import { getModel1, getModel2, getModel3, getModel4, getModel5, getModel6, getModel7, getModel8, getModel9, getModel10, getModel11, getModel12, getModel13, getModel14, getModel15, getModel16, calculateCircleDelta } from '../utils/utils';
 import { FormSchemaPitchInInning } from '../types/schemas/pitch-in-inning-schema';
 
 export default function MLRPitchers() {
@@ -29,6 +29,7 @@ export default function MLRPitchers() {
     const [pitcherOption, setPitcherOption] = React.useState<number>()
     const [pitchNumbers, setPitchNumbers] = React.useState<number[]>([])
     const [swingNumbers, setSwingNumbers] = React.useState<number[]>([])
+    const [deltaNumbers, setDeltaNumbers] = React.useState<number[]>([])
     const [pitchCount, setPitchCount] = React.useState<number[]>([])
     const [pitch1Numbers, setPitch1Numbers] = React.useState<number[]>([])
     const [pitch1Count, setPitch1Count] = React.useState<number[]>([])
@@ -106,6 +107,7 @@ export default function MLRPitchers() {
     function parseSeasonSessionData() {
       const pNumbers = []
       const sNumbers = []
+      const dNumbers = []
       const pCount = []
       const p1Numbers = []
       const p1Count = []
@@ -127,6 +129,7 @@ export default function MLRPitchers() {
       for ( let i = 0; i< filteredPitches.length; i++) {
         pNumbers.push(filteredPitches[i].pitch)
         sNumbers.push(filteredPitches[i].swing)
+        dNumbers.push(calculateCircleDelta(filteredPitches[i], filteredPitches[i-1]))
         pCount.push(i+1)
 
         if ( filteredPitches[i].inning !== (filteredPitches[i-1]?.inning ?? '0')) {
@@ -162,7 +165,7 @@ export default function MLRPitchers() {
 
       console.log(inningNumbers)
       console.log(inningObject)
-
+      setDeltaNumbers(dNumbers)
       setPitchNumbers(pNumbers)
       setSwingNumbers(sNumbers)
       setPitchCount(pCount)
@@ -380,6 +383,22 @@ export default function MLRPitchers() {
                   }
                 </Grid>
               </Grid>
+              <Grid size={12} alignItems="center" justifyContent="center">
+                  {deltaNumbers.length != 0 &&
+                    <LineChart
+                      title="Delta from Pitch to Pitch"
+                      xAxis={[{ data: pitchCount }]}
+                      series={[
+                        {
+                          label: "Delta", data: deltaNumbers, color:"teal"
+                        },
+                      ]}
+                      width={document.documentElement.clientWidth * 0.90}
+                      height={document.documentElement.clientHeight * 0.40}
+                      tooltip={{trigger: 'item'}}
+                    />
+                  }
+                </Grid>
               <Grid container justifyContent="center" >
                 <Grid size={12} alignItems="center" justifyContent="center">
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 && inningNumbers.length != 0 &&
