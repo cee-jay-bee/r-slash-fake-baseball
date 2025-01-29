@@ -11,6 +11,18 @@ return delta < 0 ? 1000 + delta : delta
 
 }
 
+export function calculateCircleDelta(pitch: FormSchemaPitch, previousPitch: FormSchemaPitch | null ) {
+    let delta = pitch.pitch - (previousPitch?.pitch ?? 0)
+    if (delta > 500) {
+        delta -= 1000
+    } else if (delta < -500) {
+        delta += 1000
+    }
+    
+    return delta
+    
+    }
+
 export function getModel1(pitch: FormSchemaPitch) {
 const average = (pitch.pitch + pitch.swing) / 2;
 const adjustment = Math.abs(pitch.pitch - pitch.swing) > 500 ? 500 : 0;

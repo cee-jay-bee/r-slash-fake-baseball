@@ -17,7 +17,7 @@ import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import Grid from '@mui/material/Grid2';
 import { LineChart } from '@mui/x-charts/LineChart';
-import { getModel1, getModel2, getModel3, getModel4, getModel5, getModel6, getModel7, getModel8, getModel9, getModel10, getModel11, getModel12, getModel13, getModel14, getModel15, getModel16 } from '../utils/utils';
+import { getModel1, getModel2, getModel3, getModel4, getModel5, getModel6, getModel7, getModel8, getModel9, getModel10, getModel11, getModel12, getModel13, getModel14, getModel15, getModel16, calculateCircleDelta } from '../utils/utils';
 import { FormSchemaPitchInInning } from '../types/schemas/pitch-in-inning-schema';
 
 export default function FCBPitchers() {
@@ -29,6 +29,7 @@ export default function FCBPitchers() {
     const [pitcherOption, setPitcherOption] = React.useState<number>()
     const [pitchNumbers, setPitchNumbers] = React.useState<number[]>([])
     const [swingNumbers, setSwingNumbers] = React.useState<number[]>([])
+    const [deltaNumbers, setDeltaNumbers] = React.useState<number[]>([])
     const [pitchCount, setPitchCount] = React.useState<number[]>([])
     const [pitch1Numbers, setPitch1Numbers] = React.useState<number[]>([])
     const [pitch1Count, setPitch1Count] = React.useState<number[]>([])
@@ -98,6 +99,7 @@ export default function FCBPitchers() {
       }
       const pNumbers = []
       const sNumbers = []
+      const dNumbers = []
       const pCount = []
       const p1Numbers = []
       const p1Count = []
@@ -120,6 +122,7 @@ export default function FCBPitchers() {
         for (let i = 0; i < response.data.length; i++) {
           pNumbers.push(response.data[i].pitch)
           sNumbers.push(response.data[i].swing)
+          dNumbers.push(calculateCircleDelta(response.data[i], response.data[i-1]))
           pCount.push(i+1)
           if ( response.data[i].inning !== (response?.data[i-1]?.inning ?? '0')) {
             p1Numbers.push(response.data[i].pitch)
@@ -152,12 +155,13 @@ export default function FCBPitchers() {
           inningObject.push({inning: i+1, pitches: inningPitches[i]})
           innings.push(i+1)
         }
-
+        console.log(dNumbers)
         console.log(inningObject)
         console.log(innings)
         setPitches(response.data)
         setPitchNumbers(pNumbers)
         setSwingNumbers(sNumbers)
+        setDeltaNumbers(dNumbers)
         setPitchCount(pCount)
         setPitch1Numbers(p1Numbers)
         setPitch1Count(p1Count)
@@ -305,6 +309,24 @@ export default function FCBPitchers() {
                         },
                       ]}
                       width={document.documentElement.clientWidth * 0.40}
+                      height={document.documentElement.clientHeight * 0.40}
+                      tooltip={{trigger: 'item'}}
+                    />
+                  }
+                </Grid>
+              </Grid>
+              <Grid container justifyContent="center">
+              <Grid size={12} alignItems="center" justifyContent="center">
+                  {deltaNumbers.length != 0 &&
+                    <LineChart
+                      title="Delta from Pitch to Pitch"
+                      xAxis={[{ data: pitchCount }]}
+                      series={[
+                        {
+                          label: "Delta", data: deltaNumbers, color:"teal"
+                        },
+                      ]}
+                      width={document.documentElement.clientWidth * 0.90}
                       height={document.documentElement.clientHeight * 0.40}
                       tooltip={{trigger: 'item'}}
                     />
