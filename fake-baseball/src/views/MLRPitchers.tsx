@@ -341,7 +341,7 @@ export default function MLRPitchers() {
                 </TableContainer>
               </Grid>
               <Grid container justifyContent="center">
-                <Grid size={12} alignItems="center" justifyContent="center">
+                <Grid size={{xs:12, sm:10, md:8, lg:6}} alignItems="center" justifyContent="center" width='100%'>
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 &&
                     <LineChart
                       title="All Pitches"
@@ -354,14 +354,13 @@ export default function MLRPitchers() {
                           label: "Swing", data: swingNumbers
                         },
                       ]}
-                      width={document.documentElement.clientWidth * 0.90}
                       height={document.documentElement.clientHeight * 0.50}
                     />
                   }
                 </Grid>
               </Grid>
               <Grid container justifyContent="center">
-                <Grid size={12} alignItems="center" justifyContent="center" >
+                <Grid size={{xs:12, sm:10, md:8, lg:6}} alignItems="center" justifyContent="center" width='100%'>
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 &&
                     <LineChart
                       title="Pitches by Placement in Inning"
@@ -377,13 +376,12 @@ export default function MLRPitchers() {
                           label: "Third Pitches", data: pitch3Numbers, color:"white"
                         },
                       ]}
-                      width={document.documentElement.clientWidth * 0.90}
                       height={document.documentElement.clientHeight * 0.50}
                     />
                   }
                 </Grid>
               </Grid>
-              <Grid size={12} alignItems="center" justifyContent="center">
+              <Grid size={{xs:12, sm:10, md:8, lg:6}} alignItems="center" justifyContent="center" width='100%'>
                   {deltaNumbers.length != 0 &&
                     <LineChart
                       title="Delta from Pitch to Pitch"
@@ -393,14 +391,13 @@ export default function MLRPitchers() {
                           label: "Delta", data: deltaNumbers, color:"teal"
                         },
                       ]}
-                      width={document.documentElement.clientWidth * 0.90}
                       height={document.documentElement.clientHeight * 0.40}
                       tooltip={{trigger: 'item'}}
                     />
                   }
                 </Grid>
               <Grid container justifyContent="center" >
-                <Grid size={12} alignItems="center" justifyContent="center">
+                <Grid size={{xs:12, sm:10, md:8, lg:6}} alignItems="center" justifyContent="center" width='100%'>
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 && inningNumbers.length != 0 &&
                     <LineChart
                       title="Pitches by Inning"
@@ -411,7 +408,6 @@ export default function MLRPitchers() {
                         label: `In ${series.inning.toString()}`,
                         color: colors[series.inning]
                       }))}
-                      width={document.documentElement.clientWidth * 0.90}
                       height={document.documentElement.clientHeight * 0.90}
                       margin= {{top: 100}}
                     />
