@@ -19,6 +19,7 @@ import Grid from '@mui/material/Grid2';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { calculateCircleDelta } from '../utils/utils';
 import { FormSchemaPitchInInning } from '../types/schemas/pitch-in-inning-schema';
+import { ChartsReferenceLine } from '@mui/x-charts/ChartsReferenceLine';
 
 export default function FCBPitchers() {
     const [players, setPlayers] = React.useState<FormSchemaPlayers>([])
@@ -293,6 +294,11 @@ export default function FCBPitchers() {
                     <LineChart
                       title="Delta from Pitch to Pitch"
                       xAxis={[{ data: pitchCount }]}
+                      yAxis={[{
+                        min: -500,   // Set the minimum value for Y-Axis
+                        max: 500,    // Set the maximum value for Y-Axis
+                        tickInterval: [-500, -400, -300, -200, -100, 0, 100, 200, 300, 400, 500], // Set custom tick values
+                      },]}
                       series={[
                         {
                           label: "Delta", data: deltaNumbers, color:"teal"
@@ -300,7 +306,9 @@ export default function FCBPitchers() {
                       ]}
                       height={document.documentElement.clientHeight * 0.40}
                       tooltip={{trigger: 'item'}}
-                    />
+                    >
+                      <ChartsReferenceLine y={0} label="0" labelAlign="end" />
+                    </LineChart>
                   }
                 </Grid>
               </Grid>
