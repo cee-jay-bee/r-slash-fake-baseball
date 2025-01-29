@@ -247,8 +247,8 @@ export default function FCBPitchers() {
                   </Table>
                 </TableContainer>
               </Grid>
-              <Grid container justifyContent="center">
-                <Grid size={6} alignItems="center" justifyContent="center">
+              <Grid size={{xs:12, sm:12, md:12, lg:12}} container justifyContent="center">
+                <Grid size={{xs:12, sm:12, md:12, lg:12}} alignItems="center" justifyContent="center">
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 &&
                     <LineChart
                       title="All Pitches"
@@ -258,13 +258,14 @@ export default function FCBPitchers() {
                           label: "Pitch", data: pitchNumbers, color:"red"
                         },
                       ]}
-                      // width={document.documentElement.clientWidth * 0.50}
                       height={document.documentElement.clientHeight * 0.40}
                       tooltip={{trigger: 'item'}}
                     />
                   }
                 </Grid>
-                <Grid size={6} alignItems="center" justifyContent="center" >
+              </Grid>
+              <Grid size={{xs:12, sm:12, md:12, lg:12}} container justifyContent="center">
+                <Grid size={{xs:12, sm:12, md:12, lg:12}} alignItems="center" justifyContent="center" >
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 &&
                     <LineChart
                       title="Pitches by Placement in Inning"
@@ -280,15 +281,14 @@ export default function FCBPitchers() {
                           label: "Third Pitches", data: pitch3Numbers, color:"white"
                         },
                       ]}
-                      width={document.documentElement.clientWidth * 0.40}
                       height={document.documentElement.clientHeight * 0.40}
                       tooltip={{trigger: 'item'}}
                     />
                   }
                 </Grid>
               </Grid>
-              <Grid container justifyContent="center">
-              <Grid size={12} alignItems="center" justifyContent="center">
+              <Grid size={{xs:12, sm:12, md:12, lg:12}} container justifyContent="center">
+                <Grid size={{xs:12, sm:12, md:12, lg:12}} alignItems="center" justifyContent="center">
                   {deltaNumbers.length != 0 &&
                     <LineChart
                       title="Delta from Pitch to Pitch"
@@ -298,15 +298,14 @@ export default function FCBPitchers() {
                           label: "Delta", data: deltaNumbers, color:"teal"
                         },
                       ]}
-                      width={document.documentElement.clientWidth * 0.90}
                       height={document.documentElement.clientHeight * 0.40}
                       tooltip={{trigger: 'item'}}
                     />
                   }
                 </Grid>
               </Grid>
-              <Grid container justifyContent="center" >
-                <Grid size={12} alignItems="center" justifyContent="center">
+              <Grid size={{xs:12, sm:12, md:12, lg:12}} container justifyContent="center" >
+                <Grid size={{xs:12, sm:12, md:12, lg:12}} alignItems="center" justifyContent="center">
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 && inningNumbers.length != 0 &&
                     <LineChart
                       title="Pitches by Inning"
@@ -316,7 +315,6 @@ export default function FCBPitchers() {
                         label: `Inning ${series.inning.toString()}`,
                         color: colors[series.inning]
                       }))}
-                      width={document.documentElement.clientWidth * 0.90}
                       height={document.documentElement.clientHeight * 0.50}
                       tooltip={{trigger: 'item'}}
                     />

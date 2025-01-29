@@ -320,8 +320,8 @@ export default function MLRPitchers() {
                   </Table>
                 </TableContainer>
               </Grid>
-              <Grid container justifyContent="center">
-                <Grid size={{xs:12, sm:10, md:8, lg:6}} alignItems="center" justifyContent="center" width='100%'>
+              <Grid size={{xs:12, sm:12, md:12, lg:12}} container justifyContent="center">
+                <Grid alignItems="center" justifyContent="center" width='100%'>
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 &&
                     <LineChart
                       title="All Pitches"
@@ -339,8 +339,8 @@ export default function MLRPitchers() {
                   }
                 </Grid>
               </Grid>
-              <Grid container justifyContent="center">
-                <Grid size={{xs:12, sm:10, md:8, lg:6}} alignItems="center" justifyContent="center" width='100%'>
+              <Grid size={{xs:12, sm:12, md:12, lg:12}} container justifyContent="center">
+                <Grid alignItems="center" justifyContent="center" width='100%'>
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 &&
                     <LineChart
                       title="Pitches by Placement in Inning"
@@ -361,7 +361,7 @@ export default function MLRPitchers() {
                   }
                 </Grid>
               </Grid>
-              <Grid size={{xs:12, sm:10, md:8, lg:6}} alignItems="center" justifyContent="center" width='100%'>
+              <Grid size={{xs:12, sm:12, md:12, lg:12}} alignItems="center" justifyContent="center" width='100%'>
                   {deltaNumbers.length != 0 &&
                     <LineChart
                       title="Delta from Pitch to Pitch"
@@ -376,8 +376,8 @@ export default function MLRPitchers() {
                     />
                   }
                 </Grid>
-              <Grid container justifyContent="center" >
-                <Grid size={{xs:12, sm:10, md:8, lg:6}} alignItems="center" justifyContent="center" width='100%'>
+              <Grid size={{xs:12, sm:12, md:12, lg:12}} container justifyContent="center" >
+                <Grid alignItems="center" justifyContent="center" width='100%'>
                   {pitchCount.length != 0 && pitchNumbers.length != 0 && swingNumbers.length != 0 && inningNumbers.length != 0 &&
                     <LineChart
                       title="Pitches by Inning"
