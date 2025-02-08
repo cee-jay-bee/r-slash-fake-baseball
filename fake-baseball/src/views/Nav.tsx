@@ -11,6 +11,10 @@ export default function Nav() {
         navigate('/r-slash-fake-baseball'); // Navigate to the  route
     };
 
+    // const handleTeamsClick = () => {
+    //     navigate('/r-slash-fake-baseball/mlr/teams');
+    // };
+
     const handleMlrPitchersClick = () => {
         navigate('/r-slash-fake-baseball/mlr/pitchers');
     };
@@ -33,6 +37,7 @@ export default function Nav() {
             <Typography variant="h6" component="div" sx={{flexGrow: 1}} onClick={handleLogoClick}>
                 Fake Baseball
             </Typography>
+            {/* <Button onClick={handleTeamsClick} color="inherit">Teams</Button> */}
             <Button onClick={handleMlrPitchersClick} color="inherit">MLR Pitchers</Button>
             <Button onClick={handleMlrBattersClick} color="inherit">MLR Batters</Button>
             <Button onClick={handleFcbPitchersClick} color="inherit">FCB Pitchers</Button>

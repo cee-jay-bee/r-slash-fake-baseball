@@ -19,6 +19,7 @@ export default function App() {
         <Route path="/r-slash-fake-baseball/fcb/pitchers" element={<FCBPitchers />} />
         <Route path="/r-slash-fake-baseball/mlr/batters" element={<MLRBatters />} />
         <Route path="/r-slash-fake-baseball/mlr/pitchers" element={<MLRPitchers />} />
+        {/* <Route path="/r-slash-fake-baseball/mlr/teams" element={<Teams />} /> */}
       </Routes>
     </BrowserRouter>
   );
