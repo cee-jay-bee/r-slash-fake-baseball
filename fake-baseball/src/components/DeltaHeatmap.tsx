@@ -9,7 +9,7 @@ interface DeltaHeatmapProps {
 interface Row {
     id: number; // The delta start value
     [key: string]: number; // Dynamically indexed keys for each delta end value
-  }
+}
 
 // Function to round a delta to the nearest value in the delta range
 const roundToNearestDelta = (value: number, deltaRange: number[]): number => {
@@ -51,7 +51,7 @@ const DeltaHeatmap: React.FC<DeltaHeatmapProps> = ({ deltas }) => {
 
     if (firstIndex >= 0 && secondIndex >= 0) {
       // Increment the matrix cell for the pair of deltas
-      deltaMatrix[firstIndex][secondIndex]++;
+      deltaMatrix[secondIndex][firstIndex]++;
     }
   }
 
@@ -71,11 +71,12 @@ const DeltaHeatmap: React.FC<DeltaHeatmapProps> = ({ deltas }) => {
 
   // Define columns
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'Delta Start \\ Delta End', width: 150 },
+    { field: 'id', headerName: 'Delta Heatmap', width: 150, headerAlign: 'center', type: 'string'},
     ...deltaRange.map((delta) => ({
       field: `col${delta}`,
       headerName: `${delta}`,
       width: 100,
+      headerAlign: 'center',
       renderCell: (params: any) => (
         <Box
           sx={{
@@ -128,9 +129,13 @@ const DeltaHeatmap: React.FC<DeltaHeatmapProps> = ({ deltas }) => {
         columns={columns}
         hideFooter
         sx={{
-          '& .MuiDataGrid-cell': {
-            padding: '8px',  // Adjust padding if necessary
-          }
+            '& .MuiDataGrid-cell': {
+                padding: '8px',
+            },
+            // Ensure that header and row labels are centered
+            '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
+                textAlign: 'center',
+            }
         }}
       />
     </Box>
