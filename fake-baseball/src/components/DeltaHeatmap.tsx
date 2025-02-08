@@ -71,12 +71,11 @@ const DeltaHeatmap: React.FC<DeltaHeatmapProps> = ({ deltas }) => {
 
   // Define columns
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'Delta Heatmap', width: 150, headerAlign: 'center', type: 'string'},
+    { field: 'id', headerName: 'Delta Heatmap', width: 150, headerAlign: 'center'},
     ...deltaRange.map((delta) => ({
       field: `col${delta}`,
       headerName: `${delta}`,
       width: 100,
-      headerAlign: 'center',
       renderCell: (params: any) => (
         <Box
           sx={{
@@ -132,9 +131,9 @@ const DeltaHeatmap: React.FC<DeltaHeatmapProps> = ({ deltas }) => {
             '& .MuiDataGrid-cell': {
                 padding: '8px',
             },
-            // Ensure that header and row labels are centered
             '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
                 textAlign: 'center',
+                alignItems: 'center'
             }
         }}
       />
