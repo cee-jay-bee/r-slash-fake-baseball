@@ -20,8 +20,7 @@ export function calculateCircleDelta(pitch: FormSchemaPitch, previousPitch: Form
     }
     
     return delta
-    
-    }
+}
 
 export function getModel1(pitch: FormSchemaPitch) {
 const average = (pitch.pitch + pitch.swing) / 2;

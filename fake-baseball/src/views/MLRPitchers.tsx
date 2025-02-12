@@ -296,6 +296,7 @@ export default function MLRPitchers() {
                       <TableRow>
                           <TableCell width={50} align="center" >Pitch</TableCell>
                           <TableCell width={50} align="center" >Swing</TableCell>
+                          <TableCell width={50} align="center" >PDiff</TableCell>
                           <TableCell width={50} align="center" >Result</TableCell>
                           <TableCell width={50} align="center" >Inning</TableCell>
                           <TableCell width={50} align="center" >Outs</TableCell>
@@ -305,7 +306,7 @@ export default function MLRPitchers() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {pitches.map((pitch) => {
+                      {pitches.map((pitch, index, array) => {
                           return <TableRow
                           key={pitch.playNumber}
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -314,6 +315,7 @@ export default function MLRPitchers() {
                                 {pitch.pitch}
                             </TableCell>
                             <TableCell align="center">{pitch.swing}</TableCell>
+                            <TableCell align="center">{calculateCircleDelta(pitch, array[index-1])}</TableCell>
                             <TableCell align="center">{pitch.exactResult}</TableCell>
                             <TableCell align="center">{pitch.inning}</TableCell>
                             <TableCell align="center">{pitch.outs}</TableCell>
