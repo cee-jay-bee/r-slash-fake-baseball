@@ -155,7 +155,7 @@ export default function MLRPitchers() {
           currentChunk.push(filteredPitches[i].pitch);
         } else {
           inningPitches.push(currentChunk);
-          currentChunk = [pitches[i].pitch];
+          currentChunk = [filteredPitches[i].pitch];
         }
       }
       if (currentChunk.length > 0) {
